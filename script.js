@@ -232,14 +232,40 @@ function buildDetailPage(games) {
   const verdict = scoreVerdict(game.score);
   const offset  = RING_CIRC * (1 - game.score / 100);
 
-  const paragraphs = game.description_full
-    .split(/\n\n+/)
-    .map(p => `<p>${escapeHTML(p.trim())}</p>`)
-    .join('');
+  // description_full es ahora un array de párrafos
+  const paragraphs = Array.isArray(game.description_full)
+    ? game.description_full.map(p => `<p>${escapeHTML(p)}</p>`).join('')
+    : game.description_full.split(/\n\n+/).map(p => `<p>${escapeHTML(p.trim())}</p>`).join('');
 
   const platformTags = game.platforms
     .map(p => `<span class="platform-tag">${escapeHTML(p)}</span>`)
     .join('');
+
+  // Extraer el ID de YouTube del trailer_url
+  function getYouTubeId(url) {
+    if (!url) return null;
+    const m = url.match(/[?&]v=([^&]+)/) || url.match(/youtu\.be\/([^?]+)/);
+    return m ? m[1] : null;
+  }
+
+  const trailerId = getYouTubeId(game.trailer_url);
+
+  const coverOrVideo = trailerId
+    ? `<div class="detail-cover detail-cover--video">
+        <iframe
+          src="https://www.youtube.com/embed/${trailerId}?autoplay=1&mute=1&rel=0&modestbranding=1"
+          title="Tráiler de ${escapeAttr(game.title)}"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+       </div>`
+    : `<img
+        class="detail-cover"
+        src="${escapeAttr(game.cover_url)}"
+        alt="Portada de ${escapeAttr(game.title)}"
+        onerror="this.onerror=null;this.style.background='var(--surface-2)';this.removeAttribute('src');"
+      >`;
 
   main.innerHTML = `
     <div class="detail-hero">
@@ -251,12 +277,7 @@ function buildDetailPage(games) {
       <div class="container">
         <div class="detail-hero-inner">
 
-          <img
-            class="detail-cover"
-            src="${escapeAttr(game.cover_url)}"
-            alt="Portada de ${escapeAttr(game.title)}"
-            onerror="this.onerror=null;this.style.background='var(--surface-2)';this.removeAttribute('src');"
-          >
+          ${coverOrVideo}
 
           <div class="detail-info">
             <h1 class="detail-title">${escapeHTML(game.title)}</h1>
@@ -302,7 +323,22 @@ function buildDetailPage(games) {
     <div class="review-section">
       <div class="container">
         <div class="review-inner">
-          <div class="review-heading">Reseña</div>
+          <div class="review-header">
+            <span class="review-heading">Reseña</span>
+            ${game.video_url ? `
+            <a
+              class="video-link"
+              href="${escapeAttr(game.video_url)}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Ver análisis completo de ${escapeAttr(game.title)} en YouTube"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              Ver análisis en YouTube
+            </a>` : ''}
+          </div>
 
           <div class="review-preview" id="review-preview">
             <div class="review-text-body">
