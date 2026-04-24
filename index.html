@@ -9,16 +9,27 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <script>if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');</script>
+  <script>if(localStorage.getItem('theme')!=='light')document.documentElement.setAttribute('data-theme','dark');</script>
 </head>
 <body>
 
   <header class="site-header">
     <div class="container header-inner">
+      <a
+        class="yt-header-link"
+        href="https://www.youtube.com/@CriticoImpaciente"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Canal de YouTube CriticoImpaciente"
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+        CriticoImpaciente
+      </a>
       <a href="index.html" class="site-logo" aria-label="CriticoImpaciente inicio">
         <span class="logo-main">Critico</span><span class="logo-accent">Impaciente</span>
       </a>
-      <span class="nav-tag">Un crítico. Sin piedad.</span>
       <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar modo de color">
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
@@ -33,30 +44,30 @@
 
   <main>
 
-    <section class="hero-section">
-      <div class="container">
-        <h1 class="hero-title">Reseñas<br>de Juegos</h1>
-        <p class="hero-subtitle">Brutalmente honesto, profundamente razonado.</p>
-      </div>
-    </section>
+    <!-- HERO COMPACTO + BUSCADOR CENTRAL -->
+    <section class="search-hero">
+      <div class="container search-hero-inner">
+        <div class="search-hero-brand">
+          <h1 class="search-hero-title">Reseñas de Videojuegos</h1>
+          <p class="search-hero-sub">Brutalmente honesto, profundamente razonado.</p>
+        </div>
 
-    <section class="controls-section" aria-label="Buscar y filtrar">
-      <div class="container">
-        <div class="controls">
-          <div class="search-wrapper">
-            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <circle cx="11" cy="11" r="8"/>
-              <path d="m21 21-4.35-4.35"/>
-            </svg>
-            <input
-              type="search"
-              id="search-input"
-              class="search-input"
-              placeholder="Buscar por título..."
-              autocomplete="off"
-              aria-label="Buscar juegos por título"
-            >
-          </div>
+        <div class="search-hero-field">
+          <svg class="search-hero-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input
+            type="search"
+            id="search-input"
+            class="search-hero-input"
+            placeholder="Buscar un juego…"
+            autocomplete="off"
+            aria-label="Buscar juegos por título"
+          >
+        </div>
+
+        <div class="search-filters">
           <div class="select-wrapper">
             <select id="genre-filter" class="filter-select" aria-label="Filtrar por género">
               <option value="">Todos los géneros</option>
@@ -70,8 +81,8 @@
               <option value="year-asc">Año: Más antiguo</option>
             </select>
           </div>
+          <p id="results-count" class="results-count" aria-live="polite"></p>
         </div>
-        <p id="results-count" class="results-count" aria-live="polite"></p>
       </div>
     </section>
 

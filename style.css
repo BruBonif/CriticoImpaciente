@@ -213,9 +213,17 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 
 .header-inner {
   height: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
+}
+
+.header-inner > :first-child {
+  justify-self: start;
+}
+
+.header-inner > :last-child {
+  justify-self: end;
 }
 
 .site-logo {
@@ -224,6 +232,8 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   letter-spacing: 0.06em;
   line-height: 1;
   transition: opacity 0.2s;
+  justify-self: center;
+  text-align: center;
 }
 .site-logo:hover { opacity: 0.7; }
 .logo-main   { color: var(--text); }
@@ -252,81 +262,120 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 .back-link svg   { width: 15px; height: 15px; }
 
 /* ============================================================
-   HERO (índice)
+   HERO DE BÚSQUEDA — buscador como protagonista
    ============================================================ */
-.hero-section {
-  padding: 64px 0 44px;
-  border-bottom: 2px solid var(--text);
+.search-hero {
+  padding: 52px 0 36px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
 }
 
-.hero-title {
+.search-hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  text-align: center;
+}
+
+.search-hero-brand { text-align: center; }
+
+.search-hero-title {
   font-family: var(--font-display);
-  font-size: clamp(80px, 12vw, 148px);
-  line-height: 0.88;
-  letter-spacing: 0.02em;
+  font-size: clamp(22px, 3.5vw, 36px);
+  letter-spacing: 0.06em;
   color: var(--text);
-  margin-bottom: 16px;
+  line-height: 1;
+  margin-bottom: 6px;
 }
 
-.hero-subtitle {
+.search-hero-sub {
   font-family: var(--font-body);
   font-style: italic;
-  font-size: 20px;
+  font-size: 15px;
   color: var(--text-muted);
 }
 
-.hero-rule { display: none; }
-
-/* ============================================================
-   CONTROLES / FILTROS
-   ============================================================ */
-.controls-section {
-  padding: 0 0 20px;
-  background: var(--bg);
-}
-
-.controls {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  padding: 18px 0 0;
-}
-
-.search-wrapper {
+/* Campo de búsqueda grande y centrado */
+.search-hero-field {
   position: relative;
-  flex: 1 1 220px;
-  min-width: 180px;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
 }
 
-.search-icon {
+.search-hero-icon {
   position: absolute;
-  left: 13px;
+  left: 18px;
   top: 50%;
   transform: translateY(-50%);
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
   color: var(--text-muted);
   pointer-events: none;
   transition: color 0.2s;
 }
-.search-wrapper:focus-within .search-icon { color: var(--accent); }
+.search-hero-field:focus-within .search-hero-icon { color: var(--accent); }
 
-.search-input,
-.filter-select {
+.search-hero-input {
   width: 100%;
-  padding: 10px 14px 10px 40px;
-  background: var(--surface);
-  border: 1.5px solid var(--border-mid);
-  border-radius: var(--radius);
-  color: var(--text);
+  padding: 16px 20px 16px 52px;
   font-family: var(--font-ui);
-  font-size: 14px;
+  font-size: 17px;
+  background: var(--bg);
+  border: 2px solid var(--border-mid);
+  border-radius: 50px;
+  color: var(--text);
   outline: none;
+  box-shadow: var(--shadow-sm);
   transition:
     border-color 0.22s var(--ease),
-    box-shadow   0.22s var(--ease),
-    background   0.18s var(--ease);
+    box-shadow   0.22s var(--ease);
 }
+.search-hero-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-glow), var(--shadow-sm);
+}
+.search-hero-input::placeholder { color: var(--text-muted); }
+
+/* Fila de filtros + contador */
+.search-filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.search-filters .select-wrapper { flex: 1 1 180px; max-width: 240px; }
+.search-filters .filter-select  { width: 100%; border-radius: 50px; }
+
+.search-filters .results-count {
+  flex: 1 1 100%;
+  text-align: center;
+  margin-top: 0;
+}
+
+/* Dark mode */
+[data-theme="dark"] .search-hero { background: var(--surface); }
+[data-theme="dark"] .search-hero-input {
+  background: var(--surface-2);
+  color: var(--text);
+  border-color: var(--border-mid);
+}
+[data-theme="dark"] .search-hero-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+/* ============================================================
+   CONTROLES / FILTROS (legacy — oculto, mantenido por compatibilidad)
+   ============================================================ */
+.controls-section { display: none; }
+.hero-section      { display: none; }
 
 .filter-select {
   padding: 10px 36px 10px 14px;
@@ -372,7 +421,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 /* ============================================================
    GRID DE JUEGOS
    ============================================================ */
-.games-section { padding-bottom: 100px; }
+.games-section { padding: 32px 0 100px; }
 
 .games-grid {
   display: grid;
@@ -729,12 +778,8 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 
 .detail-hero--has-video .detail-score-row {
   justify-content: center;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.detail-hero--has-video .score-verdict {
-  font-size: 22px;
+  flex-direction: row;
+  gap: 40px;
 }
 
 .detail-hero--has-video .detail-meta-grid {
@@ -781,9 +826,41 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 /* Fila de puntuación con anillo SVG */
 .detail-score-row {
   display: flex;
-  align-items: center;
-  gap: 24px;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 40px;
   flex-wrap: wrap;
+}
+
+/* Centrado cuando hay video */
+.detail-hero--has-video .detail-score-row {
+  justify-content: center;
+}
+
+/* Bloque individual de puntuación (crítico / comunidad) */
+.score-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.score-block-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.score-block-verdict {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--text-dim);
+  line-height: 1.2;
+  text-align: center;
 }
 
 .score-ring-wrap {
@@ -1087,6 +1164,41 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 }
 .error-back-link:hover { border-bottom-color: var(--accent); opacity: 0.7; }
 
+/* Botón YouTube en header */
+.yt-header-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  background: rgba(200, 0, 0, 0.06);
+  border: 1.5px solid rgba(200, 0, 0, 0.22);
+  border-radius: 50px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #c0202e;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.18s var(--ease);
+}
+.yt-header-link:hover {
+  background: rgba(200, 0, 0, 0.13);
+  border-color: rgba(200, 0, 0, 0.45);
+  transform: translateY(-1px);
+}
+.yt-header-link svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+[data-theme="dark"] .yt-header-link {
+  color: #ff7a7a;
+  background: rgba(255, 100, 100, 0.07);
+  border-color: rgba(255, 100, 100, 0.25);
+}
+[data-theme="dark"] .yt-header-link:hover {
+  background: rgba(255, 100, 100, 0.15);
+  border-color: rgba(255, 100, 100, 0.5);
+}
+
 /* ============================================================
    BOTÓN MODO NOCHE
    ============================================================ */
@@ -1132,7 +1244,12 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 @media (max-width: 768px) {
   :root { --header-h: 54px; }
 
-  /* Ocultar video en mobile, mostrar portada */
+  .search-hero { padding: 32px 0 24px; }
+  .search-hero-inner { gap: 20px; }
+  .search-hero-input { font-size: 15px; padding: 13px 16px 13px 46px; }
+  .search-hero-icon  { left: 14px; width: 17px; height: 17px; }
+  .search-filters    { gap: 8px; }
+  .search-filters .select-wrapper { flex: 1 1 140px; max-width: 100%; }
   .detail-cinema-band { display: none; }
   .detail-cover--mobile { display: block !important; }
   .detail-hero--has-video .detail-hero-inner {
@@ -1144,7 +1261,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
     max-width: 100%;
   }
   .detail-hero--has-video .detail-title { text-align: center; }
-  .detail-hero--has-video .detail-score-row { justify-content: center; flex-direction: column; gap: 12px; }
+  .detail-hero--has-video .detail-score-row { justify-content: center; flex-wrap: wrap; }
   .detail-hero--has-video .detail-meta-grid { grid-template-columns: 1fr 1fr; justify-content: center; gap: 16px 28px; }
   .detail-hero--has-video .meta-item { align-items: center; padding: 0; border-right: none; }
   .detail-hero--has-video .meta-platforms { justify-content: center; }

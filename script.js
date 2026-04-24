@@ -289,9 +289,12 @@ function buildDetailPage(games) {
 
   document.title = `${game.title} — CriticoImpaciente`;
 
-  const cls     = scoreClass(game.score);
-  const verdict = scoreVerdict(game.score);
-  const offset  = RING_CIRC * (1 - game.score / 100);
+  const cls          = scoreClass(game.score);
+  const clsCommunity = scoreClass(game.community_score ?? game.score);
+  const verdict      = scoreVerdict(game.score);
+  const verdictComm  = scoreVerdict(game.community_score ?? game.score);
+  const offset       = RING_CIRC * (1 - game.score / 100);
+  const offsetComm   = RING_CIRC * (1 - (game.community_score ?? game.score) / 100);
 
   // description_full es ahora un array de párrafos
   const paragraphs = Array.isArray(game.description_full)
@@ -353,17 +356,37 @@ function buildDetailPage(games) {
             <h1 class="detail-title">${escapeHTML(game.title)}</h1>
 
             <div class="detail-score-row">
-              <div class="score-ring-wrap" aria-label="Puntuación: ${game.score} de 100">
-                <svg class="score-ring-svg" viewBox="0 0 130 130" aria-hidden="true">
-                  <circle cx="65" cy="65" r="54" class="ring-track"/>
-                  <circle cx="65" cy="65" r="54" class="ring-fill ${cls}" id="score-ring-fill"/>
-                </svg>
-                <div class="score-ring-center" aria-hidden="true">
-                  <span class="score-ring-number ${cls}">${game.score}</span>
-                  <span class="score-ring-label">Punt.</span>
+              <!-- Puntuación del crítico -->
+              <div class="score-block">
+                <div class="score-ring-wrap" aria-label="Puntuación del crítico: ${game.score} de 100">
+                  <svg class="score-ring-svg" viewBox="0 0 130 130" aria-hidden="true">
+                    <circle cx="65" cy="65" r="54" class="ring-track"/>
+                    <circle cx="65" cy="65" r="54" class="ring-fill ${cls}" id="score-ring-fill"/>
+                  </svg>
+                  <div class="score-ring-center" aria-hidden="true">
+                    <span class="score-ring-number ${cls}" id="score-ring-number">${game.score}</span>
+                    <span class="score-ring-label">Punt.</span>
+                  </div>
                 </div>
+                <span class="score-block-label">El Crítico</span>
+                <span class="score-block-verdict">${escapeHTML(verdict)}</span>
               </div>
-              <span class="score-verdict">${escapeHTML(verdict)}</span>
+
+              <!-- Puntuación de la comunidad -->
+              <div class="score-block">
+                <div class="score-ring-wrap" aria-label="Puntuación de la comunidad: ${game.community_score ?? '—'} de 100">
+                  <svg class="score-ring-svg" viewBox="0 0 130 130" aria-hidden="true">
+                    <circle cx="65" cy="65" r="54" class="ring-track"/>
+                    <circle cx="65" cy="65" r="54" class="ring-fill ${clsCommunity}" id="score-ring-fill-community"/>
+                  </svg>
+                  <div class="score-ring-center" aria-hidden="true">
+                    <span class="score-ring-number ${clsCommunity}" id="score-ring-number-community">${game.community_score ?? '—'}</span>
+                    <span class="score-ring-label">Punt.</span>
+                  </div>
+                </div>
+                <span class="score-block-label">La Gente</span>
+                <span class="score-block-verdict">${escapeHTML(verdictComm)}</span>
+              </div>
             </div>
 
             <div class="detail-meta-grid">
@@ -436,12 +459,15 @@ function buildDetailPage(games) {
     </div>
   `;
 
-  // Animar el anillo de puntuación al cargar
+  // Animar ambos anillos al cargar
   requestAnimationFrame(() => {
     setTimeout(() => {
-      const ring = document.getElementById('score-ring-fill');
-      const num  = document.querySelector('.score-ring-number');
-      if (ring) triggerRingAnim(ring, num, game.score, RING_CIRC);
+      const ring    = document.getElementById('score-ring-fill');
+      const num     = document.getElementById('score-ring-number');
+      const ringC   = document.getElementById('score-ring-fill-community');
+      const numC    = document.getElementById('score-ring-number-community');
+      if (ring)  triggerRingAnim(ring,  num,  game.score,                          RING_CIRC);
+      if (ringC) triggerRingAnim(ringC, numC, game.community_score ?? game.score,  RING_CIRC);
     }, 300);
   });
 
@@ -535,8 +561,8 @@ if (backToTopBtn) {
   const btn    = document.getElementById('theme-toggle');
   const stored = localStorage.getItem('theme');
 
-  // Aplicar tema guardado antes de pintar la página
-  if (stored === 'dark') html.setAttribute('data-theme', 'dark');
+  // Dark es el default: aplicar dark salvo que el usuario haya elegido light
+  if (stored !== 'light') html.setAttribute('data-theme', 'dark');
 
   if (btn) {
     btn.addEventListener('click', () => {
