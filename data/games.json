@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "title": "Elden Ring",
+    "genre": "RPG",
+    "platforms": ["PC", "PS5", "PS4", "Xbox Series X"],
+    "release_year": 2022,
+    "developer": "FromSoftware",
+    "score": 97,
+    "description_short": "A seamless open world redefines what soulslike games can be. FromSoftware's collaboration with George R.R. Martin births a world of haunting beauty and relentless challenge.",
+    "description_full": "Elden Ring is a landmark achievement in game design. FromSoftware's collaboration with George R.R. Martin has produced one of the most dense, atmospheric, and rewarding open worlds ever committed to code. Every cliff edge hides a secret. Every fog gate guards a lesson in patience and precision.\n\nThe Lands Between is a world built on geological strata of lore — not explained to you, but waiting to be excavated. Fragments of story live in item descriptions, environmental details, and the silent choreography of enemy placement. It rewards attention in a way few games dare.\n\nCombat retains the series' signature weight and deliberateness, but the open world grants a freedom that transforms the experience. Stuck on Margit? Ride into the wilderness and grow stronger. The game respects your intelligence enough to let you find your own path.\n\nFrom the crystalline spires of Raya Lucaria to the corrupted swamps of Lake of Rot, every biome is distinct and memorable. Malenia remains one of the most demanding optional bosses in gaming history — and fighting her feels like an education.\n\nThis is not just a great game. It is a statement about what games can be when they trust the player completely.",
+    "cover_url": "https://picsum.photos/seed/eldenring22/300/400"
+  },
+  {
+    "id": 2,
+    "title": "Baldur's Gate 3",
+    "genre": "RPG",
+    "platforms": ["PC", "PS5", "Xbox Series X"],
+    "release_year": 2023,
+    "developer": "Larian Studios",
+    "score": 96,
+    "description_short": "An all-time classic that sets an impossible standard for RPGs. Larian built a game so deep, so reactive, and so richly written that it may not be matched for a decade.",
+    "description_full": "Baldur's Gate 3 is an embarrassment of riches. Larian Studios spent years in early access iterating, polishing, and expanding until they arrived at something that feels genuinely complete — a rarity in the modern era of game development.\n\nThe D&D 5e ruleset is translated with fidelity and flair. Every class, every spell, every combination of race and background opens up different dialogue options, skill checks, and story branches. A Drow Warlock experiences a fundamentally different Baldur's Gate than a Human Paladin. The game doesn't just acknowledge your choices — it builds upon them with remarkable consistency.\n\nThe writing is the crown jewel. Companions like Shadowheart, Astarion, and Gale are more fully realized than characters in most prestige TV series. Their arcs are earned, their contradictions logical, and their flaws genuinely affecting. Astarion's redemption story is among the finest pieces of writing in the RPG genre.\n\nCombat is tactical and punishing on higher difficulties, but the environmental storytelling that frames each encounter makes even routine battles feel authored. You'll remember the fight in the windmill. You'll remember the Goblin camp. You'll remember the Underdark.\n\nThis is the RPG of the decade — possibly the genre-defining work of its generation.",
+    "cover_url": "https://picsum.photos/seed/baldursgate3bg/300/400"
+  },
+  {
+    "id": 3,
+    "title": "God of War Ragnarök",
+    "genre": "Action-Adventure",
+    "platforms": ["PS5", "PS4", "PC"],
+    "release_year": 2022,
+    "developer": "Santa Monica Studio",
+    "score": 94,
+    "description_short": "A sequel that expands on its predecessor in every direction. Ragnarök is a masterclass in cinematic storytelling woven through relentless, gorgeous action.",
+    "description_full": "God of War Ragnarök had an almost impossible task: follow up one of the most acclaimed games of the previous decade. Santa Monica Studio met the challenge with confidence and craft, delivering a sequel that doesn't just match the original — in several key respects, it surpasses it.\n\nThe relationship between Kratos and Atreus has evolved meaningfully. Where the first game explored the tension of a new father unable to show vulnerability, Ragnarök gives us both characters in motion — Atreus searching for identity, Kratos learning to let go. Their dynamic is the emotional engine of the entire game.\n\nThe realms are spectacular. Vanaheim's lush jungles, Svartalfheim's industrial canals, and Asgard's gleaming tyranny each have a distinct visual language and feel. Exploration is generously rewarded and rarely feels like a checklist.\n\nCombat has been refined with new weapon abilities and a deeper skill tree. The Draupnir Spear adds a genuinely new tactical dimension. Bosses like Thor and Heimdall are among the finest in the series.\n\nIf there is a weakness, it is that the game occasionally feels over-directed — a constant stream of dialogue and cinematic moments that rarely lets you breathe. But when Ragnarök gives you space, it earns its grandeur completely.",
+    "cover_url": "https://picsum.photos/seed/godofwarrag/300/400"
+  },
+  {
+    "id": 4,
+    "title": "Alan Wake 2",
+    "genre": "Action-Adventure",
+    "platforms": ["PC", "PS5", "Xbox Series X"],
+    "release_year": 2023,
+    "developer": "Remedy Entertainment",
+    "score": 89,
+    "description_short": "Remedy's most ambitious game is a surrealist horror odyssey — a work of art that blurs the line between game and film with complete, lunatic conviction.",
+    "description_full": "Alan Wake 2 is the most formally adventurous mainstream game released in years. Remedy Entertainment, freed from the constraints of a safer publisher, has made something genuinely strange — a horror game that functions as a meditation on authorship, reality, and the terrifying power of narrative.\n\nThe dual protagonist structure is inspired. Saga Anderson's FBI investigation grounds the horror in procedural realism, while Alan Wake's Dark Place chapters venture into pure surrealism. The contrast amplifies both — normalcy makes the nightmare stranger, and the nightmare makes the normalcy feel thin.\n\nThe live-action musical number in Act 2 is one of the most audacious sequences in gaming history. It has no right to work as well as it does. It shouldn't work at all. And yet it is, somehow, perfect.\n\nGameplay is intentionally obtuse in places — resource management is tight, enemy encounters can feel repetitive, and the puzzle systems require genuine lateral thinking. These are not all virtues. But they serve the game's identity as something designed to unsettle rather than comfort.\n\nSam Lake has built a cinematic universe in four games that grows more coherent and stranger with each entry. Alan Wake 2 is the boldest move in that ongoing project — and a genuine artistic achievement.",
+    "cover_url": "https://picsum.photos/seed/alanwake2aw/300/400"
+  },
+  {
+    "id": 5,
+    "title": "Cyberpunk 2077",
+    "genre": "RPG",
+    "platforms": ["PC", "PS5", "Xbox Series X"],
+    "release_year": 2023,
+    "developer": "CD Projekt Red",
+    "score": 86,
+    "description_short": "Three years of patches and a redemption arc later, Cyberpunk 2077 has become the game it should have always been: a dense, beautiful, flawed masterpiece.",
+    "description_full": "Cyberpunk 2077's story is one of gaming's strangest: a game that launched in catastrophic shape, became a cultural cautionary tale, and then — through sustained, extraordinary effort — transformed into one of the generation's essential RPGs.\n\nNight City is the achievement. As a realized urban environment, it has no peers. The density of detail, the verticality, the day/night atmosphere, the cultural layering of corpo towers over homeless camps — it is the most convincing imagined city in games. Walking through Watson at 3am in the rain, neon reflecting off wet pavement, ambient music drifting from a nearby bar, is an experience without equivalent.\n\nThe Phantom Liberty expansion elevated the base game further. Dogtown is a masterfully designed expansion zone, and the new spy-thriller storyline featuring Idris Elba is genuinely cinematic. The revamped skill tree and new Relic mechanics transformed V into a more expressive build.\n\nCharacter writing is uneven — Judy and Johnny are exceptional, while some supporting arcs feel abbreviated — but the best quests are extraordinary. Sinnerman may be the most uncomfortable quest ever put in an open-world game.\n\nThe ghost of 2020 still lingers. But what CD Projekt Red built from the wreckage is remarkable.",
+    "cover_url": "https://picsum.photos/seed/cyberpunk2077cp/300/400"
+  },
+  {
+    "id": 6,
+    "title": "Final Fantasy XVI",
+    "genre": "Action RPG",
+    "platforms": ["PS5", "PC"],
+    "release_year": 2023,
+    "developer": "Square Enix",
+    "score": 74,
+    "description_short": "A confident lurch toward action and narrative drama that pays off in spectacle but loses something in translation. An excellent first half precedes a mechanical second.",
+    "description_full": "Final Fantasy XVI is Square Enix at its most narratively ambitious and mechanically compromised. The game's opening thirty hours are among the finest the series has produced — dark, politically textured, emotionally devastating in places, and anchored by a genuinely compelling central tragedy in Clive Rosfield's story.\n\nThe Eikon battles are pure spectacle. Titan vs. Ifrit. Phoenix vs. Garuda. These kaiju-scale clashes are technically astonishing and thematically resonant — each representing a pivotal story beat rather than a mere boss fight. They are set pieces that justify the whole production.\n\nBut the game loses coherence in its second half. The pacing slackens, the side quests become rote, and the RPG systems — stripped back to near-nothing in the name of accessibility — provide insufficient character depth to sustain a 40+ hour campaign. The Active Time Lore system is a clever solution to the game's lore density problem, but it also highlights how much worldbuilding is crammed into text boxes rather than dramatized through play.\n\nHiroshi Takai's team made a coherent, bold game with a genuine point of view. It isn't the JRPG the purists wanted. It isn't quite the action game it aspires to be. But it is singular — and in an era of iterative sequels, singularity counts for something.",
+    "cover_url": "https://picsum.photos/seed/ff16squareenix/300/400"
+  },
+  {
+    "id": 7,
+    "title": "Starfield",
+    "genre": "RPG",
+    "platforms": ["PC", "Xbox Series X"],
+    "release_year": 2023,
+    "developer": "Bethesda Game Studios",
+    "score": 69,
+    "description_short": "A hundred hours of content with a thirty-hour attention span. Starfield is Bethesda at maximum scale and minimum soul — a galaxy of empty space between points of interest.",
+    "description_full": "Starfield is the most Bethesda game Bethesda has ever made, which is both a sincere compliment and a brutal indictment. It contains multitudes: a thousand planets, hundreds of quests, and systems layered upon systems. It is also, somehow, hollow.\n\nThe core exploration loop is fatally compromised by the game's relationship with space. Rather than the seamless transition from planet surface to orbit to space travel that defines the fantasy of space exploration, Starfield offers menus. You open a star map, select a destination, hold a button, and watch a loading screen. The wonder of the cosmos is procedurally generated and structurally avoided.\n\nWhen the game works — and it does work, in specific, authored contexts — it works well. The Crimson Fleet questline is a genuinely excellent faction story. The New Atlantis main city is impressively realized. The skill system, while wide, offers meaningful specialization.\n\nCharacter writing has regressed from Fallout 4's companions. Your crew are pleasant but forgettable. The main story is competent and thematically interesting but resolutely unexciting in its execution.\n\nBethesda needed to evolve. Starfield chose to scale instead. A missed opportunity of cosmic proportions.",
+    "cover_url": "https://picsum.photos/seed/starfieldbgs/300/400"
+  },
+  {
+    "id": 8,
+    "title": "Forspoken",
+    "genre": "Action RPG",
+    "platforms": ["PS5", "PC"],
+    "release_year": 2023,
+    "developer": "Luminous Productions",
+    "score": 58,
+    "description_short": "Movement that sings, writing that grates, a world that wastes both. Forspoken's magic parkour is genuinely wonderful — everything surrounding it is not.",
+    "description_full": "Forspoken is a game of one extraordinary idea and many poor executions. The magic parkour system — flowing, fast, and endlessly expressive — is one of the most kinetically satisfying traversal systems in recent memory. Moving through Athia's open world, chaining spells into movement into combat into movement, has a rhythmic satisfaction that very few games achieve.\n\nEverything else ranges from mediocre to damaging.\n\nThe writing is the central wound. Frey Holland is afflicted with dialogue that tries so relentlessly hard to be contemporary and self-aware that it achieves the opposite — it dates the game before it ships. The cuff's quippy commentary made me lower the volume on multiple occasions. Strong character writing would have transformed Forspoken's potential; what's here undermines it.\n\nAthia as an open world is generic by design — the Blight has aesthetically neutralized it into brown-grey monotony, which may be intentional symbolism but is visually tedious. Enemy variety is thin, the upgrade systems are confusing without being deep, and the story takes too long to become interesting.\n\nLuminous Productions clearly had talented people working on this. The movement system alone demonstrates that. But a game built around a single great mechanic, surrounded by mediocrity, is a lesson in misallocated resources.",
+    "cover_url": "https://picsum.photos/seed/forspokenlum/300/400"
+  }
+]
