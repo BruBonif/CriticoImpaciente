@@ -311,6 +311,14 @@ function buildDetailPage(games) {
 
   const trailerId = getYouTubeId(game.trailer_url);
 
+  const coverImg = `<img
+        class="detail-cover detail-cover--mobile"
+        src="${escapeAttr(game.cover_url)}"
+        alt="Portada de ${escapeAttr(game.title)}"
+        style="display:none"
+        onerror="this.onerror=null;this.style.background='var(--surface-2)';this.removeAttribute('src');"
+      >`;
+
   const coverOrVideo = trailerId
     ? `<div class="detail-cover detail-cover--video">
         <iframe
@@ -321,12 +329,7 @@ function buildDetailPage(games) {
           allowfullscreen
         ></iframe>
        </div>`
-    : `<img
-        class="detail-cover"
-        src="${escapeAttr(game.cover_url)}"
-        alt="Portada de ${escapeAttr(game.title)}"
-        onerror="this.onerror=null;this.style.background='var(--surface-2)';this.removeAttribute('src');"
-      >`;
+    : coverImg;
 
   main.innerHTML = `
     ${trailerId ? `
@@ -344,7 +347,7 @@ function buildDetailPage(games) {
       <div class="container">
         <div class="detail-hero-inner">
 
-          ${!trailerId ? coverOrVideo : ''}
+          ${trailerId ? coverImg : coverOrVideo}
 
           <div class="detail-info">
             <h1 class="detail-title">${escapeHTML(game.title)}</h1>
@@ -523,4 +526,29 @@ if (backToTopBtn) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
+
+/* ============================================================
+   MODO NOCHE
+   ============================================================ */
+(function () {
+  const html   = document.documentElement;
+  const btn    = document.getElementById('theme-toggle');
+  const stored = localStorage.getItem('theme');
+
+  // Aplicar tema guardado antes de pintar la página
+  if (stored === 'dark') html.setAttribute('data-theme', 'dark');
+
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        html.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+  }
+})();
 
