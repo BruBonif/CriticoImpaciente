@@ -268,7 +268,13 @@ function buildDetailPage(games) {
       >`;
 
   main.innerHTML = `
-    <div class="detail-hero">
+    ${trailerId ? `
+    <div class="detail-cinema-band">
+      ${coverOrVideo}
+    </div>
+    ` : ''}
+
+    <div class="detail-hero ${trailerId ? 'detail-hero--has-video' : ''}">
       <div
         class="detail-hero-bg"
         style="background-image: url('${escapeAttr(game.cover_url)}')"
@@ -277,7 +283,7 @@ function buildDetailPage(games) {
       <div class="container">
         <div class="detail-hero-inner">
 
-          ${coverOrVideo}
+          ${!trailerId ? coverOrVideo : ''}
 
           <div class="detail-info">
             <h1 class="detail-title">${escapeHTML(game.title)}</h1>

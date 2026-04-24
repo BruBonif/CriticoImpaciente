@@ -519,13 +519,54 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   grid-template-columns: 1fr;
 }
 
+/* Banda negra de cine — solo rodea el video */
+.detail-cinema-band {
+  background: #000;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  animation: cinemaDark 0.9s var(--ease) both;
+  overflow: hidden;
+}
+
+@keyframes cinemaDark {
+  from { background: var(--surface); }
+  to   { background: #000; }
+}
+
+/* Cortinas laterales animadas sobre la banda */
+.detail-cinema-band::before,
+.detail-cinema-band::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 18vw;
+  background: #000;
+  z-index: 10;
+  animation: curtainOpen 1s 0.1s var(--ease) both;
+  pointer-events: none;
+}
+.detail-cinema-band { position: relative; }
+.detail-cinema-band::before { left: 0; }
+.detail-cinema-band::after  { right: 0; }
+
+@keyframes curtainOpen {
+  from { width: 18vw; opacity: 1; }
+  to   { width: 0;    opacity: 1; }
+}
+
+/* Video — sin bordes, fusionado con el negro */
 .detail-cover--video {
   width: 100%;
-  max-width: 900px;
+  max-width: 1100px;
   aspect-ratio: 16 / 9;
-  border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: var(--shadow-lg), 0 0 0 1px var(--border);
+  box-shadow: none;
+  border: none;
+  border-radius: 0;
 }
 
 .detail-cover--video iframe {
@@ -534,6 +575,64 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   display: block;
   border: none;
 }
+
+/* Hero normal cuando hay video (sin negro) */
+.detail-hero--has-video {
+  background: var(--surface);
+}
+
+.detail-hero--has-video .detail-hero-inner {
+  grid-template-columns: 1fr;
+}
+
+.detail-hero--has-video .detail-info {
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+  align-items: center;
+  text-align: center;
+  animation: fadeUpInfo 0.7s 0.5s var(--ease) both;
+}
+
+.detail-hero--has-video .detail-title {
+  text-align: center;
+}
+
+.detail-hero--has-video .detail-score-row {
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-hero--has-video .score-verdict {
+  font-size: 22px;
+}
+
+.detail-hero--has-video .detail-meta-grid {
+  grid-template-columns: repeat(4, auto);
+  justify-content: center;
+  gap: 0;
+}
+
+.detail-hero--has-video .meta-item {
+  align-items: center;
+  padding: 0 20px;
+  border-right: 1px solid var(--border);
+}
+
+.detail-hero--has-video .meta-item:last-child {
+  border-right: none;
+}
+
+.detail-hero--has-video .meta-platforms {
+  justify-content: center;
+}
+
+@keyframes fadeUpInfo {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 
 .detail-info {
   display: flex;
@@ -680,7 +779,10 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   padding: 56px 0 96px;
 }
 
-.review-inner { max-width: 820px; }
+.review-inner {
+  max-width: 820px;
+  margin: 0 auto;
+}
 
 /* Encabezado de reseña — flex para alinear heading + enlace YouTube */
 .review-header {
