@@ -1,2 +1,2 @@
 # CriticoImpaciente
-Pagina web de critica de videojuegos.
+Pagina web de critica de videojuegos..
