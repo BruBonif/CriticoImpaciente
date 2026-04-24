@@ -2,8 +2,9 @@
    CRITICO IMPACIENTE — script.js
    ============================================================ */
 
-const GAMES_URL = 'data/games.json';
-const RING_CIRC = 339.292; // 2π × r=54
+const GAMES_URL  = 'data/games.json';
+const RING_CIRC  = 339.292; // 2π × r=54  (detalle)
+const BADGE_CIRC = 113.097; // 2π × r=18  (tarjeta)
 
 /* ============================================================
    UTILIDADES
@@ -13,6 +14,49 @@ function scoreClass(score) {
   if (score >= 75) return 'score-green';
   if (score >= 50) return 'score-yellow';
   return 'score-red';
+}
+
+// Interpola entre dos colores hex según t ∈ [0,1]
+function lerpColor(a, b, t) {
+  const ar = parseInt(a.slice(1,3),16), ag = parseInt(a.slice(3,5),16), ab = parseInt(a.slice(5,7),16);
+  const br = parseInt(b.slice(1,3),16), bg = parseInt(b.slice(3,5),16), bb = parseInt(b.slice(5,7),16);
+  return `rgb(${Math.round(ar+(br-ar)*t)},${Math.round(ag+(bg-ag)*t)},${Math.round(ab+(bb-ab)*t)})`;
+}
+
+// Siempre rojo → naranja → verde según progreso 0–100
+function gradientColor(p) {
+  if (p <= 50) return lerpColor('#c0202e', '#e8711a', p / 50);
+  return lerpColor('#e8711a', '#1a9447', (p - 50) / 50);
+}
+
+// Anima el anillo con rAF: siempre pasa por los 3 estadios de color
+function triggerRingAnim(fill, num, targetScore, circ) {
+  const duration = 3500;
+  const targetOffset = circ * (1 - targetScore / 100);
+
+  // Reset al estado inicial
+  fill.style.strokeDashoffset = circ;
+  fill.style.stroke = '#c0202e';
+  if (num) num.style.color = '#c0202e';
+
+  void fill.getBoundingClientRect(); // forzar reflow
+
+  const start = performance.now();
+
+  function frame(now) {
+    const t = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - t, 2); // ease-out cuadrático
+    const current = eased * targetScore;
+
+    fill.style.strokeDashoffset = circ * (1 - current / 100);
+    const color = gradientColor(current);
+    fill.style.stroke = color;
+    if (num) num.style.color = color;
+
+    if (t < 1) requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(frame);
 }
 
 function scoreVerdict(score) {
@@ -149,10 +193,19 @@ function buildIndexPage(games) {
             loading="lazy"
             onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22400%22%3E%3Crect width=%22300%22 height=%22400%22 fill=%22%23edeae4%22/%3E%3C/svg%3E';"
           >
-          <div class="card-score-badge ${cls}" aria-hidden="true">${game.score}</div>
         </div>
         <div class="card-body">
-          <h2 class="card-title">${escapeHTML(game.title)}</h2>
+          <div class="card-title-row">
+            <h2 class="card-title">${escapeHTML(game.title)}</h2>
+            <div class="card-score-ring" aria-label="Puntuación ${game.score}">
+              <svg class="card-ring-svg" viewBox="0 0 44 44">
+                <circle cx="22" cy="22" r="18" class="card-ring-track"/>
+                <circle cx="22" cy="22" r="18" class="card-ring-fill ${cls}"
+                  style="stroke-dasharray:${BADGE_CIRC};stroke-dashoffset:${BADGE_CIRC}"/>
+              </svg>
+              <span class="card-ring-num ${cls}">${game.score}</span>
+            </div>
+          </div>
           <div class="card-meta">
             <span class="card-genre">${escapeHTML(game.genre)}</span>
             <span class="card-year">${game.release_year}</span>
@@ -162,6 +215,14 @@ function buildIndexPage(games) {
       `;
 
       grid.appendChild(card);
+
+      // Animar el anillo después de que la tarjeta sea visible
+      const fill = card.querySelector('.card-ring-fill');
+      const num  = card.querySelector('.card-ring-num');
+
+      setTimeout(() => {
+        triggerRingAnim(fill, num, game.score, BADGE_CIRC);
+      }, 350 + i * 80);
     });
   }
 
@@ -376,8 +437,9 @@ function buildDetailPage(games) {
   requestAnimationFrame(() => {
     setTimeout(() => {
       const ring = document.getElementById('score-ring-fill');
-      if (ring) ring.style.strokeDashoffset = offset;
-    }, 80);
+      const num  = document.querySelector('.score-ring-number');
+      if (ring) triggerRingAnim(ring, num, game.score, RING_CIRC);
+    }, 300);
   });
 
   // Toggle "Leer más / Ver menos"
@@ -447,3 +509,18 @@ async function main() {
 }
 
 main();
+
+/* ============================================================
+   BOTÓN VOLVER ARRIBA
+   ============================================================ */
+const backToTopBtn = document.getElementById('back-to-top');
+if (backToTopBtn) {
+  window.addEventListener('scroll', () => {
+    backToTopBtn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
