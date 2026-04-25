@@ -1239,24 +1239,19 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
     grid-template-columns: 240px 1fr;
     gap: 36px;
   }
+
+  /* Header: ocultar logo, solo YouTube + toggle */
+  .site-logo  { display: none; }
+  .back-link span { display: none; }
+  .site-header .header-inner {
+    grid-template-columns: auto 1fr auto;
+  }
+  .back-link { gap: 0; }
+  .back-link svg { width: 18px; height: 18px; }
 }
 
 @media (max-width: 768px) {
   :root { --header-h: 54px; }
-
-  /* Header mobile: ocultar logo, solo YouTube + toggle */
-  .site-logo  { display: none; }
-  .back-link span { display: none; }
-
-  .site-header .header-inner {
-    grid-template-columns: auto 1fr auto;
-  }
-  .site-header .header-inner > :first-child { justify-self: start; }
-  .site-header .header-inner > :last-child  { justify-self: end; }
-
-  /* En game.html el back-link queda solo con el ícono */
-  .back-link { gap: 0; }
-  .back-link svg { width: 18px; height: 18px; }
 
   .search-hero { padding: 32px 0 24px; }
   .search-hero-inner { gap: 20px; }
